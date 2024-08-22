@@ -9,9 +9,16 @@ app = Flask(__name__)
 def index():
     return "Welcome to the Faker api"
 
-@app.route("/get_names")
-def get_names():
-    names = []
-    for i in range(100):
-        names.append(faker.name())
-    return jsonify(names)
+@app.route("/generate_names/<amount>", methods=['GET'])
+def get_names(amount):
+        item_list = []
+        for i in range(int(amount)):
+            item_list.append(faker.name())
+        return jsonify(item_list)
+
+@app.route("/generate_addresses/<amount>", methods=['GET'])
+def generate_addresses(amount):
+            item_list = []
+            for i in range(int(amount)):
+                item_list.append(faker.address())
+            return jsonify(item_list)
